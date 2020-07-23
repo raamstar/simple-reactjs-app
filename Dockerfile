@@ -11,6 +11,7 @@ COPY package*.json ./
  
 # Installs all node packages
 RUN npm install
+RUN npm install react-scripts@3.4.1 -g
 RUN npm audit fix
 
 # Copies everything over to Docker environment
