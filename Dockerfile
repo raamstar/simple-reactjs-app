@@ -11,7 +11,8 @@ COPY package*.json ./
  
 # Installs all node packages
 RUN npm install
- 
+RUN npm audit fix
+
 # Copies everything over to Docker environment
 COPY . .
  
