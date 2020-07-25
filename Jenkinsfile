@@ -4,7 +4,7 @@ pipeline {
     stages{
 	stage ('checkout') {
 	    steps{
-	git url: 'https://github.com/raamstar/React-Project.git'
+	git url: 'https://github.com/raamstar/simple-reactjs-app.git'
 	}
 	}
 	
