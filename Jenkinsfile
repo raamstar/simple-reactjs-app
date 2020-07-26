@@ -11,7 +11,9 @@ pipeline {
 	stage('Submit Stack') {
             steps {
 		    script{
-                     sh "aws cloudformation create-stack --stack-name s3bucket --template-body file://stack.json --region 'us-east-1'"
+			withCredentials([string(credentialsId: 'key', variable: 'credentials')]) 
+		     {
+		     sh "aws cloudformation create-stack --stack-name s3bucket --template-body file://stack.json --region 'us-east-1'"
 		     sh "sudo -su"	    
 		     sh "apt-get update -qq"
         	     sh "apt-get install -y apt-transport-https ca-certificates"
@@ -31,6 +33,7 @@ pipeline {
         	     sh "docker build . -t react-app"
         	     sh "docker run react-app"    
 		   }
+		 }	    
               }
           }    
   }
