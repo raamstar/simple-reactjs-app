@@ -19,7 +19,7 @@ pipeline {
                      sh "echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | tee /etc/apt/sources.list.d/docker.list"
                      sh "apt-get update -qq"
                      sh "apt-get purge lxc-docker || true"
-                     sh "apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual"
+                     
          	     sh "apt-get -y install docker-engine"
         	     sh "usermod -aG docker ubuntu"
         	     sh "mkdir -p /etc/systemd/system/docker.service.d"
