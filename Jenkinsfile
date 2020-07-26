@@ -23,7 +23,7 @@ pipeline {
          	     sh "apt-get -y install docker-engine"
         	     sh "usermod -aG docker ubuntu"
         	     sh "mkdir -p /etc/systemd/system/docker.service.d"
-        	     sh "printf "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375\n" >>  /etc/systemd/system/docker.service.d/docker.conf"
+        	   
         	     sh "systemctl daemon-reload"
                      sh "systemctl restart docker"
         	     sh "git init"
@@ -33,36 +33,5 @@ pipeline {
 		   }
               }
           }    
-	
-	
-	stage('compile result')
-	{
-	    steps{
-	        script{
-	    def node = tool name: 'node'}
-	    
-	    sh '''
-	           docker build -t plmnko098/check .
-	       
-	           
-	     '''
-	    
-	    }
-	}
-	stage('pushing the images')
-	{
-	    steps{
-	        script{
-	            sh '''
-	            
-	            docker push plmnko098/check
-	            docker run -d --name=check -p 3000:3000 plmnko098/check 
-	            '''
-	            
-	        }
-	    }
-	}
-	
-	
-    }
+  }
 }
