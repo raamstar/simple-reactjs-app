@@ -7,6 +7,12 @@ pipeline {
 	git url: 'https://github.com/raamstar/simple-reactjs-app.git'
 	}
 	}
+	    
+	stage('Submit Stack') {
+            steps {
+            sh "aws cloudformation create-stack --stack-name s3bucket --template-body file://stack.json --region 'us-east-1'"
+              }
+          }    
 	
 	
 	stage('compile result')
