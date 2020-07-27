@@ -4,7 +4,8 @@ pipeline {
     stages{
 	stage ('checkout') {
 	    steps{
-	git url: 'https://github.com/raamstar/simple-reactjs-app.git'
+		    //git url: 'https://github.com/raamstar/simple-reactjs-app.git'
+		    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/raamstar/simple-reactjs-app.git']]])
 	}
 	}
 	    
