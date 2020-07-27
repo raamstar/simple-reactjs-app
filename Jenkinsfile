@@ -10,7 +10,7 @@ pipeline {
 	stage('Submit Stack') {
             steps {
 		    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {	     
-				    bat "aws cloudformation create-stack --stack-name myteststack --template-body file://stack.json --region us-east-1"
+				    sh "aws cloudformation create-stack --stack-name myteststack --template-body file://stack.json --region us-east-1"
 		    }
           }    
   }
