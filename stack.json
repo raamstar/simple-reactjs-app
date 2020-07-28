@@ -1,7 +1,7 @@
 {
     "Resources": {
         "AppNode": {
-            "Type": "AWS::IAM::User",
+            "Type": "AWS::EC2::Instance",
             "Properties": {
                 "InstanceType": "t2.micro",
                 "AvailabilityZone": "us-east-1a",
@@ -15,7 +15,7 @@
             }
         },
         "AppNodeSG": {
-            "Type": "AWS::IAM::SecurityGroup",
+            "Type": "AWS::EC2::SecurityGroup",
             "Properties": {
                 "GroupDescription": "for the app nodes that allow ssh, http and docker ports",
                 "SecurityGroupIngress": [
