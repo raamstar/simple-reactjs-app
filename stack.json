@@ -1,7 +1,7 @@
 {
     "Resources": {
         "AppNode": {
-            "Type": "AWS::EC2::Instance",
+            "Type": "AWS::IAM::User",
             "Properties": {
                 "InstanceType": "t2.micro",
                 "AvailabilityZone": "us-east-1a",
