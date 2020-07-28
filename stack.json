@@ -4,7 +4,7 @@
             "Type": "AWS::IAM::User",
             "Properties": {
                 "InstanceType": "t2.micro",
-                "AvailabilityZone": "us-east-1a",
+                "AvailabilityZone": "us-east-1",
                 "ImageId": "ami-0a0ddd875a1ea2c7f",
                 "KeyName": "EC2",
                 "SecurityGroups": [
