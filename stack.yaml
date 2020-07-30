@@ -1,7 +1,7 @@
 
 Resources:
   AppNode:
-    Type: 'AWS::IAM::User'
+    Type: 'AWS::EC2::Instance'
     Properties:
       InstanceType: t2.micro
       AvailabilityZone: us-east-1a
