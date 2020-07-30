@@ -1,0 +1,112 @@
+
+Resources:
+  AppNode:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: t2.micro
+      AvailabilityZone: us-east-1a
+      ImageId: ami-0a0ddd875a1ea2c7f
+      KeyName: EC2
+      SecurityGroups:
+        - !Ref AppNodeSG
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: d2ee3d27-9648-4b2f-b4be-5f664a8f2a74
+  AppNodeSG:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: 'for the app nodes that allow ssh, http and docker ports'
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '2375'
+          ToPort: '2375'
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: '3000'
+          ToPort: '3000'
+          CidrIp: 0.0.0.0/0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 60dc208a-2230-4594-a152-f57981ed86a0
+  DatabaseInstance:
+    Type: 'AWS::RDS::DBInstance'
+    Properties:
+      DBName: blog
+      Engine: MySQL
+      MasterUsername: bloguser
+      MasterUserPassword: password123
+      DBInstanceClass: db.t2.micro
+      AllocatedStorage: '5'
+      DBSecurityGroups:
+        - !Ref DatabaseSG
+      VPCSecurityGroups:
+        - !Ref AppNodeSG
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 9ab479ea-8aca-48da-a2f9-750bbfe39b74
+  DatabaseSG:
+    Type: 'AWS::RDS::DBSecurityGroup'
+    Properties:
+      GroupDescription: Security Group for RDS public access
+      DBSecurityGroupIngress:
+        - CIDRIP: 0.0.0.0/0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 8e0f3bbd-2499-4e74-806a-fbdf8d4233ba
+Metadata:
+  'AWS::CloudFormation::Designer':
+    8e0f3bbd-2499-4e74-806a-fbdf8d4233ba:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 60
+        'y': 90
+      z: 1
+      embeds: []
+    9ab479ea-8aca-48da-a2f9-750bbfe39b74:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 180
+        'y': 90
+      z: 1
+      embeds: []
+      isassociatedwith:
+        - 8e0f3bbd-2499-4e74-806a-fbdf8d4233ba
+        - 60dc208a-2230-4594-a152-f57981ed86a0
+    60dc208a-2230-4594-a152-f57981ed86a0:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 60
+        'y': 210
+      z: 1
+      embeds: []
+    d2ee3d27-9648-4b2f-b4be-5f664a8f2a74:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 180
+        'y': 210
+      z: 1
+      embeds: []
+      isassociatedwith:
+        - 60dc208a-2230-4594-a152-f57981ed86a0
+    e9a36c0b-3f74-4b38-abfa-b94344f313bc:
+      source:
+        id: 9ab479ea-8aca-48da-a2f9-750bbfe39b74
+      target:
+        id: 60dc208a-2230-4594-a152-f57981ed86a0
+      z: 11
