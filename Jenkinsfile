@@ -24,6 +24,15 @@ pipeline {
    }
        }
    }
+	    stage('Kubernete')
+ { steps{
+     kubernetesDeploy(
+         configs: 'kubernete.yml',
+         kubeconfigId: 'MYKUBE',
+         enableConfigSubstitution: true
+         )
+ }
+ }
 	
 }
 }
