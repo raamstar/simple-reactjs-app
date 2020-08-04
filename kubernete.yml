@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-app-deployment
+  labels:
+    app: simple-react-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: simple-app-pod
+      app: simple-react-app
+  template:
+    metadata:
+      name: simple-app-pod
+      labels:
+        name: simple-app-pod
+        app: simple-react-app
+    spec:
+      containers:
+      - name: simple-app
+        image: plmnko098/simple-react-app
+        ports:
+        - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-service
+  labels:
+    name: simple-service
+    app: simple-react-app
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+    name: simple-app-pod
+    app: simple-react-app
+        
