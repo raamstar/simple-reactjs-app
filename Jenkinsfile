@@ -9,9 +9,21 @@ pipeline {
 	}
 	stage('Build Docker Image'){
 		steps{
-        sh 'docker build -t plmnko098/spring-boot-mongo .'
+        sh 'docker build -t plmnko098/simple-react-app .'
 		}
-    }    
+    } 
+	    stage('pushing image')
+   {
+       steps{
+           script{
+       withCredentials([string(credentialsId: 'DockerHubCredentials', variable: 'DockerHubcredentails')]) {
+        
+    sh "docker login -u plmnko098 -p ${DockerHubcredentails}"
+       }
+    sh "docker push plmnko098/simple-react-app "
+   }
+       }
+   }
 	
 }
 }
