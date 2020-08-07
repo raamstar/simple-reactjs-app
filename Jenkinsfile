@@ -31,6 +31,7 @@ pipeline {
 		sh 'aws cloudformation create-stack --stack-name petclinic${BUILD_NUMBER} --template-body file://stack.yaml --region us-east-1 --parameters  ParameterKey=SSHKey,ParameterValue=EC2 ParameterKey=ELBVPC,ParameterValue=vpc-977297ea ParameterKey=ELBSubnet,ParameterValue="subnet-9df326c2\\,subnet-25538404"'
         }
  }
+ }
 	
 }
 }
