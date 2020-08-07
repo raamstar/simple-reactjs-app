@@ -24,14 +24,12 @@ pipeline {
    }
        }
    }
-	    stage('Kubernete')
- { steps{
-     kubernetesDeploy(
-         configs: 'kubernete.yml',
-         kubeconfigId: 'MYKUBE',
-         enableConfigSubstitution: true
-         )
- }
+	    stage('AWS')
+ { steps {
+        echo "Creating AWS CloudFormation Stack"
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws-key', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+		sh 'aws cloudformation create-stack --stack-name petclinic${BUILD_NUMBER} --template-body file://stack.yaml --region us-east-1 --parameters  ParameterKey=SSHKey,ParameterValue=EC2 ParameterKey=ELBVPC,ParameterValue=vpc-977297ea ParameterKey=ELBSubnet,ParameterValue="subnet-9df326c2\\,subnet-25538404"'
+        }
  }
 	
 }
