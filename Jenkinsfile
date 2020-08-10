@@ -9,7 +9,7 @@ pipeline {
 	}
 	stage('Build Docker Image'){
 		steps{
-        sh 'docker build -t plmnko098/simple-react-app .'
+        sh 'docker build -t plmnko098/simple-react-app-dev .'
 		}
     } 
 	    stage('pushing image')
